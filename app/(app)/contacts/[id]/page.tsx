@@ -576,7 +576,7 @@ export default function ContactDetailPage() {
           newsletter_opt_in: draftNewsletter,
           do_not_contact: draftDnc,
           notes: draftNotes || '',
-        })
+        } as any)
         .eq('id', id);
 
       if (upd.error) throw upd.error;
