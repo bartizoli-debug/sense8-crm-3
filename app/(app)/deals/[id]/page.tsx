@@ -914,7 +914,7 @@ export default function DealDetailPage() {
     };
 
     setSavingDeal(true);
-    const { data, error } = await supabase.from('deals').update(payload).eq('id', deal.id).select('*').single();
+    const { data, error } = await supabase.from('deals').update(payload as any).eq('id', deal.id).select('*').single();
     setSavingDeal(false);
 
     if (error) {
@@ -981,7 +981,7 @@ export default function DealDetailPage() {
       return;
     }
 
-    const { data, error } = await supabase.from('deals').update({ stage: newStage }).eq('id', deal.id).select('*').single();
+    const { data, error } = await supabase.from('deals').update({ stage: newStage } as any).eq('id', deal.id).select('*').single();
 
     if (error) {
       console.error(error);
@@ -1017,7 +1017,7 @@ export default function DealDetailPage() {
           due_date: newDueDate || null,
           is_done: false,
         },
-      ])
+      ] as any)
       .select()
       .single();
 
