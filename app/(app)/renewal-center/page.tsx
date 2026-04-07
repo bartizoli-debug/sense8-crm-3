@@ -641,7 +641,7 @@ export default function Page() {
     try {
       const val = owner === 'Unassigned' ? null : owner;
 
-      const { error } = await supabase.from('contracts').update({ contract_owner: val }).eq('id', contractId);
+      const { error } = await supabase.from('contracts').update({ contract_owner: val } as any).eq('id', contractId);
       if (error) {
         setActionMsg(`Assign failed: ${error.message}`);
         return;
@@ -671,7 +671,7 @@ export default function Page() {
     try {
       const { error: bulkError } = await supabase
         .from('contracts')
-        .update({ contract_owner: owner })
+        .update({ contract_owner: owner } as any)
         .in('id', visibleUnassignedIds)
         .or('contract_owner.is.null,contract_owner.eq.""');
 
@@ -688,7 +688,7 @@ export default function Page() {
       for (let i = 0; i < visibleUnassignedIds.length; i++) {
         const id = visibleUnassignedIds[i];
         setBulkProgress(`Assigning ${i + 1}/${visibleUnassignedIds.length}…`);
-        const { error } = await supabase.from('contracts').update({ contract_owner: owner }).eq('id', id);
+        const { error } = await supabase.from('contracts').update({ contract_owner: owner } as any).eq('id', id);
         if (!error) ok++;
       }
 
