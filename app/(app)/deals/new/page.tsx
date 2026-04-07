@@ -457,7 +457,7 @@ export default function Page() {
     };
 
     setSaving(true);
-    const { data, error } = await supabase.from('deals').insert([payload]).select('id').single();
+    const { data, error } = await supabase.from('deals').insert([payload] as any).select('id').single();
     setSaving(false);
 
     if (error) {
