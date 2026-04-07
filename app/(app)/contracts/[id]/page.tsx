@@ -672,7 +672,7 @@ function ContractDetailPage() {
           link_type: 'REBATE',
           created_at: new Date().toISOString(),
         },
-      ]);
+      ] as any);
       if (ins.error) console.error('rebate insert fallback error', ins.error);
     }
 
@@ -948,7 +948,7 @@ function ContractDetailPage() {
           signed_contract_url: url || null,
           notes: safeTrim(notes) || null,
           primary_won_deal_id: pId || null,
-        })
+        } as any)
         .eq('id', row.id);
 
       if (upErr) {
@@ -977,7 +977,7 @@ function ContractDetailPage() {
         if (!existingActive.has(code)) {
           const inactive = existing.find((x) => x.platform_code === code && !x.active);
           if (inactive) {
-            const { error } = await supabase.from('contract_platforms').update({ active: true }).eq('id', inactive.id);
+            const { error } = await supabase.from('contract_platforms').update({ active: true } as any).eq('id', inactive.id);
             if (error) console.error(error);
           } else {
             toActivate.push(code);
@@ -986,7 +986,7 @@ function ContractDetailPage() {
       }
 
       if (toDeactivate.length) {
-        const { error } = await supabase.from('contract_platforms').update({ active: false }).in('id', toDeactivate);
+        const { error } = await supabase.from('contract_platforms').update({ active: false } as any).in('id', toDeactivate);
         if (error) console.error(error);
       }
 
@@ -1109,7 +1109,7 @@ function ContractDetailPage() {
         changes,
       };
 
-      const { error } = await supabase.from('contract_addendums').insert([payload]);
+      const { error } = await supabase.from('contract_addendums').insert([payload] as any);
       if (error) {
         console.error(error);
         alert('Could not create addendum: ' + error.message);
@@ -1163,7 +1163,7 @@ function ContractDetailPage() {
         signed_date: editSignedDate || null,
         signed_url: editSignedUrl.trim() || null,
         notes: editAddendumNotes.trim() || null,
-      })
+      } as any)
       .eq('id', id);
     setSavingAddendumEdit(false);
 
