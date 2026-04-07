@@ -665,7 +665,7 @@ export default function CompanyDetailPage() {
 
     const res = await supabase
       .from('companies')
-      .update(payload)
+      .update(payload as any)
       .eq('id', company.id)
       .select(
         'id, created_at, company_name, legal_name, end_client_name, country_of_registration, address, vat_number, corporate_registration_number, bank_account_number, bank_name, payment_type, payment_term',
