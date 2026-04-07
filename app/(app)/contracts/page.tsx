@@ -536,7 +536,7 @@ function ContractsPage() {
 
             primary_won_deal_id: pId || null,
           },
-        ])
+        ] as any)
         .select()
         .single();
 
